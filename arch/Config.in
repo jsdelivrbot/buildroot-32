@@ -257,8 +257,9 @@ config BR2_ARCH_HAS_ATOMICS
 # Set up target binary format
 choice
 	prompt "Target Binary Format"
-	depends on BR2_bfin || BR2_m68k
-	default BR2_BINFMT_FDPIC
+        depends on BR2_arm7tmdi || BR2_arm_cortex_m3 ||	BR2_arm_cortex_m4 || BR2_m68k || BR2_bfin 
+        default BR2_BINFMT_FLAT if BR2_arm7tmdi || BR2_arm_cortex_m3 ||	BR2_arm_cortex_m4 || BR2_m68k 
+        default BR2_BINFMT_FDPIC if BR2_bfin 
 
 config BR2_BINFMT_ELF
 	bool "ELF"
@@ -279,7 +280,7 @@ config BR2_BINFMT_FDPIC
 
 config BR2_BINFMT_FLAT
 	bool "FLAT"
-	depends on BR2_bfin || BR2_m68k
+	depends on BR2_arm7tmdi || BR2_arm_cortex_m3 ||	BR2_arm_cortex_m4 || BR2_m68k || BR2_bfin 
 	select BR2_PREFER_STATIC_LIB
 	help
 	  FLAT binary is a relatively simple and lightweight executable format

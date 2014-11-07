@@ -1,0 +1,3 @@
+#!/bin/sh
+make linux-rebuild
+make UIMAGE_LOADADDR=0xD0400000 UIMAGE_ENTRYADDR=0xD0400001

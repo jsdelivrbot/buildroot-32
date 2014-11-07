@@ -49,6 +49,9 @@ config BR2_ARM_CPU_ARMV6
 config BR2_ARM_CPU_ARMV7A
 	bool
 
+config BR2_ARM_CPU_ARMV7M
+	bool
+
 choice
 	prompt "Target Architecture Variant"
 	depends on BR2_arm || BR2_armeb
@@ -141,6 +144,14 @@ config BR2_xscale
 config BR2_iwmmxt
 	bool "iwmmxt"
 	select BR2_ARM_CPU_ARMV5
+config BR2_arm_cortex_m3
+	bool "ARMV7-M Cortex M3"
+	select BR2_ARM_CPU_HAS_THUMB2
+	select BR2_ARM_CPU_ARMV7M
+config BR2_arm_cortex_m4
+	bool "ARMV7-M Cortex M4"
+	select BR2_ARM_CPU_HAS_THUMB2
+	select BR2_ARM_CPU_ARMV7M
 endchoice
 
 config BR2_arm1136jf_s
@@ -389,6 +400,8 @@ config BR2_GCC_TARGET_CPU
 	default "strongarm"	if BR2_strongarm
 	default "xscale"	if BR2_xscale
 	default "iwmmxt"	if BR2_iwmmxt
+	default "cortex-m3"	if BR2_arm_cortex_m3
+	default "cortex-m4"	if BR2_arm_cortex_m4
 
 config BR2_GCC_TARGET_ARCH
 	default "armv4t"	if BR2_arm920t
@@ -409,6 +422,7 @@ config BR2_GCC_TARGET_ARCH
 	default "armv4"		if BR2_strongarm
 	default "armv5te"	if BR2_xscale
 	default "iwmmxt"	if BR2_iwmmxt
+	default "armv7-m"	if BR2_arm_cortex_m3 || BR2_arm_cortex_m4
 
 config BR2_GCC_TARGET_ABI
 	default "aapcs-linux"
