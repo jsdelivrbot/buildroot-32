@@ -1,0 +1,36 @@
+diff -Naur busybox_old/Makefile.flags busybox_new/Makefile.flags
+--- busybox_old/Makefile.flags	2014-11-09 13:01:51.214165167 +0100
++++ busybox_new/Makefile.flags	2014-11-09 15:02:45.378359428 +0100
+@@ -74,9 +74,9 @@
+ endif
+ 
+ # If arch/$(ARCH)/Makefile did not override it (with, say, -fPIC)...
+-ARCH_FPIC ?= -fpic
+-ARCH_FPIE ?= -fpie
+-ARCH_PIE ?= -pie
++#ARCH_FPIC ?= -fpic
++#ARCH_FPIE ?= -fpie
++#ARCH_PIE ?= -pie
+ 
+ # Usage: $(eval $(call pkg_check_modules,VARIABLE-PREFIX,MODULES))
+ define pkg_check_modules
+@@ -87,7 +87,7 @@
+ ifeq ($(CONFIG_BUILD_LIBBUSYBOX),y)
+ # on i386: 14% smaller libbusybox.so
+ # (code itself is 9% bigger, we save on relocs/PLT/GOT)
+-CFLAGS += $(ARCH_FPIC)
++#CFLAGS += $(ARCH_FPIC)
+ # and another 4% reduction of libbusybox.so:
+ # (external entry points must be marked EXTERNALLY_VISIBLE)
+ CFLAGS += $(call cc-option,-fvisibility=hidden)
+@@ -99,8 +99,8 @@
+ endif
+ 
+ ifeq ($(CONFIG_PIE),y)
+-CFLAGS_busybox += $(ARCH_PIE)
+-CFLAGS += $(ARCH_FPIE)
++#CFLAGS_busybox += $(ARCH_PIE)
++#CFLAGS += $(ARCH_FPIE)
+ endif
+ 
+ ifneq ($(CONFIG_EXTRA_CFLAGS),)

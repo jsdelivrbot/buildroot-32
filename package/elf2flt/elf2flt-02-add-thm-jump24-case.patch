@@ -1,0 +1,11 @@
+diff -Naur elf2flt_old/elf2flt.c elf2flt_new/elf2flt.c
+--- elf2flt_old/elf2flt.c	2012-10-04 04:32:38.000000000 +0200
++++ elf2flt_new/elf2flt.c	2014-11-09 15:15:19.858379632 +0100
+@@ -641,6 +641,7 @@
+ 				case R_ARM_REL32:
+ 				case R_ARM_THM_PC11:
+ 				case R_ARM_THM_PC22:
++				case R_ARM_THM_JUMP24:
+ 				case R_ARM_PC24:
+ 				case R_ARM_PLT32:
+ 				case R_ARM_GOTPC:

@@ -1,0 +1,11 @@
+diff -Naur uclibc_old/include/elf.h uclibc_new/include/elf.h
+--- uclibc_old/include/elf.h	2012-05-15 09:20:09.000000000 +0200
++++ uclibc_new/include/elf.h	2014-11-09 15:21:28.938389516 +0100
+@@ -2394,6 +2394,7 @@
+ #define R_ARM_GOTPC		25	/* 32 bit PC relative offset to GOT */
+ #define R_ARM_GOT32		26	/* 32 bit GOT entry */
+ #define R_ARM_PLT32		27	/* 32 bit PLT address */
++#define R_ARM_THM_JUMP24	30
+ #define R_ARM_ALU_PCREL_7_0	32
+ #define R_ARM_ALU_PCREL_15_8	33
+ #define R_ARM_ALU_PCREL_23_15	34
