@@ -4,13 +4,33 @@ config BR2_TARGET_UBOOT
 	  Build "Das U-Boot" Boot Monitor
 
 if BR2_TARGET_UBOOT
+
+choice
+	prompt "U-boot configuration source"
+	help
+	    Select how U-boot is configured. Is it boards.cfg or _defconfig
+
+config BR2_TARGET_UBOOT_USE_DEFCONFIG
+	bool "U-boot will use default config file"
+	help
+	    U-boot will use default config file stored in /configs subdirectory.
+
+config BR_TARGET_UBOOT_USE_BOARDSCFG
+	bool "U-boot will use boards.cfg"
+	help
+	    U-boot will use boards.cfg file for target configuration
+endchoice
+
 config BR2_TARGET_UBOOT_BOARDNAME
 	string "U-Boot board name"
 	help
 	  One of U-Boot supported boards to be built.
-	  This will be suffixed with _config to meet U-Boot standard naming.
-	  See boards.cfg in U-Boot source code for the list of available
-	  configurations.
+	  Depending on "U-boot configuration source" setting 
+	  this will be suffixed with one of the following:
+	  1. _config to meet U-Boot standard naming.
+	    See boards.cfg in U-Boot source code for the list of available
+	    configurations.
+	  2. _defconfig if the chosen source was default configuration file
 
 choice
 	prompt "U-Boot Version"
@@ -34,6 +54,11 @@ config BR2_TARGET_UBOOT_CUSTOM_GIT
 config BR2_TARGET_UBOOT_CUSTOM_HG
 	bool "Custom Mercurial repository"
 
+config BR2_TARGET_UBOOT_CUSTOM_LOCAL
+	bool "Custom local directory"
+	help
+	    This option allows Buildroot to get the U-boot source
+	    code from a local directory.
 endchoice
 
 config BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE
@@ -43,6 +68,12 @@ config BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE
 config BR2_TARGET_UBOOT_CUSTOM_TARBALL_LOCATION
 	string "URL of custom U-Boot tarball"
 	depends on BR2_TARGET_UBOOT_CUSTOM_TARBALL
+
+config BR2_TARGET_UBOOT_CUSTOM_LOCAL_PATH
+	string "Path to the local directory"
+	depends on BR2_TARGET_UBOOT_CUSTOM_LOCAL
+	help
+	    Path to the local directory with the U-boot source code.
 
 if BR2_TARGET_UBOOT_CUSTOM_GIT || BR2_TARGET_UBOOT_CUSTOM_HG
 
@@ -66,7 +97,8 @@ config BR2_TARGET_UBOOT_VERSION
 	default "2014.07"	if BR2_TARGET_UBOOT_LATEST_VERSION
 	default BR2_TARGET_UBOOT_CUSTOM_VERSION_VALUE \
 		if BR2_TARGET_UBOOT_CUSTOM_VERSION
-	default "custom"	if BR2_TARGET_UBOOT_CUSTOM_TARBALL
+	default "custom"	if BR2_TARGET_UBOOT_CUSTOM_TARBALL || \
+		BR2_TARGET_UBOOT_CUSTOM_LOCAL
 	default BR2_TARGET_UBOOT_CUSTOM_REPO_VERSION \
 		if BR2_TARGET_UBOOT_CUSTOM_GIT || BR2_TARGET_UBOOT_CUSTOM_HG
 
