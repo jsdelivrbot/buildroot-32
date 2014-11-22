@@ -8,14 +8,18 @@ if BR2_TARGET_UBOOT
 choice
 	prompt "U-boot configuration source"
 	help
-	    Select how U-boot is configured. Is it boards.cfg or _defconfig
+	  Select how U-boot is configured. Available options:
+	  1. Use default configuration file. See './configs' directory in U-boot source 
+	    for available configuration files.
+	  2. Use boards.cfg file. See boards.cfg in U-Boot source code for the list of available
+	    configurations.
 
 config BR2_TARGET_UBOOT_USE_DEFCONFIG
 	bool "U-boot will use default config file"
 	help
-	    U-boot will use default config file stored in /configs subdirectory.
+	    U-boot will use default config file stored in './configs' subdirectory.
 
-config BR_TARGET_UBOOT_USE_BOARDSCFG
+config BR2_TARGET_UBOOT_USE_BOARDSCFG
 	bool "U-boot will use boards.cfg"
 	help
 	    U-boot will use boards.cfg file for target configuration
@@ -27,10 +31,11 @@ config BR2_TARGET_UBOOT_BOARDNAME
 	  One of U-Boot supported boards to be built.
 	  Depending on "U-boot configuration source" setting 
 	  this will be suffixed with one of the following:
-	  1. _config to meet U-Boot standard naming.
+	  1. _defconfig if the chosen source is default configuration file
+	    found in './configs' subdirectory of U-boot source code.
+	  2. _config to meet U-Boot standard naming.
 	    See boards.cfg in U-Boot source code for the list of available
 	    configurations.
-	  2. _defconfig if the chosen source was default configuration file
 
 choice
 	prompt "U-Boot Version"
