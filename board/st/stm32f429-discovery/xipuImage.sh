@@ -1,0 +1,12 @@
+#!/bin/sh
+RESERVE_PATH=$BASE_DIR/images/reserve
+XIPIMAGE_PATH=$BASE_DIR/images/xipImage
+XIPIMAGE_PADDED_PATH=$BASE_DIR/images/xipImage_padded
+XIPUIMAGE_PATH=$BASE_DIR/images/xipuImage
+KERNEL_ULOAD="0x08080000"
+KERNEL_UENTRY="0x08080041"
+
+rm $XIPIMAGE_PADDED_PATH
+tr '\000' '\377' < /dev/zero | dd of=$RESERVE_PATH bs=1 count=64
+cat $RESERVE_PATH $XIPIMAGE_PATH > $XIPIMAGE_PADDED_PATH
+$HOST_DIR/usr/bin/mkimage -x -A arm -O linux -T kernel -C none -a $KERNEL_ULOAD -e $KERNEL_UENTRY -n "XIP Image" -d $XIPIMAGE_PADDED_PATH $XIPUIMAGE_PATH
