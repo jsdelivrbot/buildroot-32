@@ -1,6 +1,6 @@
 #!/bin/sh
 XIPUIMAGE_PATH=$BASE_DIR/images/xipuImage
-XIPUIMAGE_ADDR="0x08080000"
+XIPUIMAGE_ADDR="0x08044000"
 openocd \
 	-f board/stm32f429discovery.cfg \
 	-c "init" \
