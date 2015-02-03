@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Buildroot 2014.11-git-g262b9c4-dirty Configuration
+# Buildroot 2014.11-git-g099f41f-dirty Configuration
 #
 BR2_HAVE_DOT_CONFIG=y
 
@@ -282,7 +282,7 @@ BR2_TARGET_GENERIC_REMOUNT_ROOTFS_RW=y
 BR2_ROOTFS_USERS_TABLES=""
 BR2_ROOTFS_OVERLAY=""
 BR2_ROOTFS_POST_BUILD_SCRIPT=""
-BR2_ROOTFS_POST_IMAGE_SCRIPT="board/st/stm32f429-discovery/xipuImage.sh board/st/stm32f429-discovery/create_superimage.sh"
+BR2_ROOTFS_POST_IMAGE_SCRIPT="board/st/stm32f429-discovery/xipuImage.sh board/st/stm32f429-discovery/create_superimage_no_romfs.sh"
 BR2_ROOTFS_POST_SCRIPT_ARGS=""
 
 #
@@ -1696,7 +1696,7 @@ BR2_TARGET_ROOTFS_CPIO_UIMAGE=y
 # BR2_TARGET_ROOTFS_EXT2 is not set
 # BR2_TARGET_ROOTFS_INITRAMFS is not set
 # BR2_TARGET_ROOTFS_JFFS2 is not set
-BR2_TARGET_ROOTFS_ROMFS=y
+# BR2_TARGET_ROOTFS_ROMFS is not set
 # BR2_TARGET_ROOTFS_SQUASHFS is not set
 # BR2_TARGET_ROOTFS_TAR is not set
 # BR2_TARGET_ROOTFS_UBIFS is not set
