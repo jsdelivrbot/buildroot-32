@@ -24,6 +24,7 @@ ${HOST_DIR}/usr/bin/mkknlimg "${BINARIES_DIR}/zImage" \
 	"${BINARIES_DIR}/kernel-marked/zImage"
 
 rm -rf "${GENIMAGE_TMP}"
+cp ${BOARD_DIR}/uboot.env ${BINARIES_DIR}/
 
 genimage                           \
 	--rootpath "${TARGET_DIR}"     \
